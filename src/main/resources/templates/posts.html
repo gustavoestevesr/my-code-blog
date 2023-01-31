@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>MyCodeBlog</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="style/styleCss.css"/>-->
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <div class="div" style="width: 70%; margin: auto; display: flex; justify-content: space-between;">
+                <span class="navbar-brand mb-0 h1">MyCodeBlog</span>
+                <form class="d-flex" method="get" th:action="@{/posts/id}">
+                    <input class="form-control me-2" type="search" placeholder="Procurar post ..." aria-label="Search" name="id" th:value="${id}">
+                    <button class="btn btn-outline-primary" type="submit">Procurar</button>
+                </form>
+                <!-- <form class="d-flex" method="get" th:action="@{/posts/title}">
+                    <input class="form-control me-2" type="search" placeholder="Procurar post ..." aria-label="Search" name="title" th:value="${title}">
+                    <button class="btn btn-outline-primary" type="submit">Procurar</button>
+                </form> -->
+                <a href="/newpost" class="btn btn-outline-success" role="button">Novo Post</a>
+            </div>
+        </nav>
+    </header>
+
+    <section>
+        <div class="container" style="width: 60%; padding-bottom: 30px;">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" style="background-color: white; padding-left: 0px;">
+                    <li class="breadcrumb-item active" aria-current="page">Posts</li>
+                </ol>
+            </nav>
+
+            <th:block th:include="SuccessfulMessage"></th:block>
+
+            <div class="card shadow-sm bg-white rounded" style="margin-top: 20px;" th:each="post : ${posts}">
+                <div class="card-body">
+                    <img th:src="@{${post.urlImage}}" class="card-img-top" alt="Imagem do Post" height="200px"
+                        style="border-radius: 5px;">
+                    <a th:href="${(#mvc.url('BC#getPostByID').arg(0, post.id)).build()}">
+                        <h4 class="card-title" style="font-weight: bold; color: black; padding-top: 5px;"><span
+                                th:text="${post.title}"></span></h4>
+                    </a>
+                    <p class="card-text"><span th:utext="${#strings.abbreviate(post.text,400)} "></span>
+                    <p>
+                    <p class="card-subtitle mb-2 text-muted" style="font-size: 0.8rem;">
+                        <span th:text="${post.author}"></span>
+                        <span th:text="${post.createdAt}"></span>
+                    </p>
+                    <p class="card-subtitle mb-2 text-muted" style="font-size: 0.8rem;">                        
+                        <span th:text="${post.views}"></span>
+                        <span> visualizações</span>
+                    </p>
+                    <div class="div" style="display: flex; justify-content: flex-end;">
+                        <a th:href="@{/deletepost/{id}(id=${post.id})}" class="btn btn-outline-danger btn-sm"
+                            role="button">Excluir Post</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
