@@ -10,5 +10,6 @@ public interface BlogService {
     public PostModel save(PostModel postModel);
     public void delete(Long id);
     public PostModel findById(Long id);
+    public List<PostModel> findByTitle(String title);
 
 }

@@ -35,5 +35,10 @@ public class BlogServiceImpl implements BlogService {
     public PostModel findById(Long id) {
         return postRepository.findById(id).get();
     }
+
+    @Override
+    public List<PostModel> findByTitle(String title) {
+        return postRepository.findByTitle(title);
+    }
     
 }
