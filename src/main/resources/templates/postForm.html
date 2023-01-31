@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>MyCodeBlog</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="style/styleCss.css"/>-->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <div class="div" style="width: 70%; margin: auto;">
+                <span class="navbar-brand mb-0 h1">MyCodeBlog</span>
+            </div>
+        </nav>
+    </header>
+
+    <section>
+        <div class="container" style="width: 60%;">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" style="background-color: white; padding-left: 0px;">
+                    <li class="breadcrumb-item"><a href="/posts">Posts</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Novo Post</li>
+                </ol>
+            </nav>
+            <div>
+                <th:block th:include="validationMessage"></th:block>
+
+                <form method="post">
+                    <div class="form-floating mb-3">
+                        <label for="title">Title <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Title of post">
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <label for="author">Author <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="author" name="author" placeholder="Author of post">
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <label for="urlImage">Url Image of Post <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="urlImage" name="urlImage" placeholder="Url Image of Post">
+                    </div>
+
+                    <div class="form-floating">
+                        <label for="text">Text of post <span style="color: red;">*</span></label>
+                        <textarea class="form-control" placeholder="Text of post" id="text" name="text"></textarea>
+                    </div>
+
+                    <p><small class="form-text text-muted" style="color: red;"><span style="color: red;">*</span> Campos
+                            obrigatórios</small></p>
+
+                    <button type="submit" class="btn btn-primary">Publicar</button>
+                    <a href="/posts" class="btn btn-danger" role="button">Cancelar</a>
+
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        $('#summernote').summernote({
+            placeholder: 'Texto *',
+            tabsize: 2,
+            height: 300
+        });
+    </script>
+
+</body>
+
+</html>
